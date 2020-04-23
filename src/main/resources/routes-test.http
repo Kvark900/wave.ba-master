@@ -1,0 +1,109 @@
+### API METADATA
+GET http://localhost:8080/api/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+### API METADATA
+GET http://localhost:8080/api/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+
+###Provide username and password to get valid Json Web Token
+POST http://127.0.0.1:8080/auth
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Get all talents
+GET http://localhost:8080/api/talents
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+###
+DELETE http://localhost:8080/api/talents/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+
+### Get all talents by language spoken
+GET http://localhost:8080/api/talents/search/findByLanguageIds?languages=1,2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+
+### Get all talents by voice type
+GET http://localhost:8080/api/talents/search/findByVoiceTypesIds?voiceTypes=1,2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+
+###
+GET http://localhost:8080/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+###
+GET http://localhost:8080/api/roles/search/existsRoleByName?name=ROLE_ADMIN
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+###
+POST http://localhost:8080/api/talents
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+{
+  "username": "kemal900",
+  "password": "pmfWeb",
+  "firstName": "Kemal",
+  "lastName": "Zigovic",
+  "email": "kemal.zigovic@hotmail.com",
+  "enabled": true,
+  "lastPasswordResetDate": "11.04.2020.",
+  "roles": [
+    "http://localhost:8080/api/roles/1"
+  ],
+  "languagesSpoken": [
+    "http://localhost:8080/api/languages/1",
+    "http://localhost:8080/api/languages/2"
+  ],
+  "voiceTypes":[
+    "http://localhost:8080/api/voiceTypes/1"
+  ],
+  "intonations": [
+    "http://localhost:8080/api/intonations/1",
+    "http://localhost:8080/api/intonations/3"
+  ]
+}
+
+###
+PATCH http://localhost:8080/api/talents
+Content-Type: application/json-patch+json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+{
+  "op":"replace",
+  "path":"/username",
+  "value":"kvark900"
+}
+
+###
+GET http://localhost:8080/api/intonations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+###
+GET http://localhost:8080/api/voiceTypes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+###
+GET http://localhost:8080/health
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4ODE3NzM2NywiaWF0IjoxNTg3NTcyNTY3fQ.7mBux_c5is8sXxoiKEaYljEnnUDKro75WvU346oOX68qnBmY-PXlJ6Xo_5NgHyPwgJp8xMdiT_jDOQIYlJWODQ
+
+###
