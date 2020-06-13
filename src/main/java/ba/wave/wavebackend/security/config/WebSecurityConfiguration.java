@@ -90,7 +90,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/security/**").permitAll()
+                .antMatchers( "/security/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .anyRequest().authenticated();
 
         JWTFilter authorizationFilter = new JWTFilter(userDetailsService(), jwtUtil, tokenHeader);
