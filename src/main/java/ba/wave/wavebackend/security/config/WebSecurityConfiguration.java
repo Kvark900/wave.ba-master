@@ -93,6 +93,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/security/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .antMatchers( "/api/talents/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/intonations").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/voiceTypes").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/languages").permitAll()
                 .anyRequest().authenticated();
 
         JWTFilter authorizationFilter = new JWTFilter(userDetailsService(), jwtUtil, tokenHeader);
