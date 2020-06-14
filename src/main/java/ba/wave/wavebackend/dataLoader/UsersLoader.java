@@ -1,10 +1,17 @@
 package ba.wave.wavebackend.dataLoader;
 
-import ba.wave.wavebackend.model.user.*;
+import ba.wave.wavebackend.model.Talent;
+import ba.wave.wavebackend.model.user.Role;
+import ba.wave.wavebackend.model.user.RoleName;
+import ba.wave.wavebackend.model.user.User;
+import ba.wave.wavebackend.repository.IntonationRepository;
+import ba.wave.wavebackend.repository.TalentRepository;
+import ba.wave.wavebackend.repository.VoiceTypeRepository;
 import ba.wave.wavebackend.service.RoleService;
 import ba.wave.wavebackend.service.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +24,19 @@ public class UsersLoader implements ApplicationListener<ContextRefreshedEvent> {
     private boolean dataLoaded = false;
     private RoleService roleService;
     private UserService userService;
+    private PasswordEncoder passwordEncoder;
+    private IntonationRepository intonationRepository;
+    private VoiceTypeRepository voiceTypeRepository;
+    private TalentRepository talentRepository;
 
-    public UsersLoader(RoleService roleService, UserService userService) {
+    public UsersLoader(RoleService roleService, UserService userService, PasswordEncoder passwordEncoder,
+                       IntonationRepository intonationRepository, VoiceTypeRepository voiceTypeRepository, TalentRepository talentRepository) {
         this.roleService = roleService;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.intonationRepository = intonationRepository;
+        this.voiceTypeRepository = voiceTypeRepository;
+        this.talentRepository = talentRepository;
     }
 
     @Override
@@ -29,6 +45,8 @@ public class UsersLoader implements ApplicationListener<ContextRefreshedEvent> {
         if (dataLoaded) return;
         Set<Role> adminRoles = Collections.singleton(createRoleIfNotFound(RoleName.ROLE_ADMIN));
         Set<Role> userRoles = Collections.singleton(createRoleIfNotFound(RoleName.ROLE_USER));
+        Set<Role> talentRole = Collections.singleton(createRoleIfNotFound(RoleName.ROLE_TALENT));
+
         createUserIfNotFound("admin", "$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi",
                 "admin", "admin", "admin@admin.com",
                 true, new Date(1514764800000L), adminRoles);
@@ -38,6 +56,8 @@ public class UsersLoader implements ApplicationListener<ContextRefreshedEvent> {
         createUserIfNotFound("disabled", "$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC",
                 "user", "user", "disabled@user.com",
                 false, new Date(1514764800000L), userRoles);
+
+        createTalents(talentRole);
         dataLoaded = true;
     }
 
@@ -67,6 +87,25 @@ public class UsersLoader implements ApplicationListener<ContextRefreshedEvent> {
         user.setRoles(roles);
         userService.save(user);
         return user;
+    }
+
+
+    @Transactional
+    void createTalents(Set<Role> talentRole) {
+        for (int i = 0; i < 7; i++) {
+            Talent talent = new Talent();
+            talent.setFirstName("Dummy" +i);
+            talent.setLastName("Dummy"+ i);
+            talent.setUsername("Dummy" + i);
+            talent.setPassword(passwordEncoder.encode("pass"+i));
+            talent.setEmail("email@email " + i +".com");
+            talent.setEnabled(true);
+            talent.setLastPasswordResetDate(new Date());
+            talent.setRoles(talentRole);
+            talent.setIntonations(Collections.singleton(intonationRepository.getOne(1)));
+            talent.setVoiceTypes(Collections.singleton(voiceTypeRepository.getOne(1)));
+            talentRepository.save(talent);
+        }
     }
 
 }
