@@ -92,7 +92,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers( "/security/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
-                .antMatchers( "/api/talents").permitAll()
+                .antMatchers( "/api/talents/**").permitAll()
                 .anyRequest().authenticated();
 
         JWTFilter authorizationFilter = new JWTFilter(userDetailsService(), jwtUtil, tokenHeader);
